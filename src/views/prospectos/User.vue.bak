@@ -1,0 +1,114 @@
+<template>
+  <CRow>
+    <CCol col="15" lg="6">
+      <CCard>
+        <CCardHeader>
+        #Usuario:  {{ $route.params.id }}
+        </CCardHeader>
+        <CCardBody>
+          <CDataTable 
+            striped 
+            small 
+            fixed
+            :items="items" 
+            :fields="fields"
+          >
+            <template slot="value" slot-scope="data">
+              <strong>{{data.item.value}}</strong>
+            </template>
+          </CDataTable>
+        </CCardBody>
+        <CCardFooter>
+          <CButton color="primary" @click="goBack">Regresar</CButton>
+        </CCardFooter>
+      </CCard>
+    </CCol>
+    <CCol col="15" lg="6">
+      <CCard>
+        <CCardHeader>
+        Listado de Documentos Adjuntos
+        </CCardHeader>
+        <CCardBody>
+          <CDataTable 
+            striped 
+            small 
+            fixed
+            :items="itemsDocuments" 
+            :fields="fieldsDocuments"
+          >
+            <template slot="value" slot-scope="data">
+              <strong>{{data.items.value}}</strong>
+            </template>
+			<template #Descargar="{item}">
+            <td>
+              
+                <CButton color="ligth" @click="clickDownload( item.url_document )">
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                    width="24" height="24"
+                    viewBox="0 0 172 172"
+                    style=" fill:#000000;"><defs><linearGradient x1="86" y1="49.68919" x2="86" y2="74.78238" gradientUnits="userSpaceOnUse" id="color-1_03zeLGLpNgBj_gr1"><stop offset="0" stop-color="#70dfff"></stop><stop offset="1" stop-color="#70afff"></stop></linearGradient><linearGradient x1="86" y1="14.92369" x2="86" y2="165.20869" gradientUnits="userSpaceOnUse" id="color-2_03zeLGLpNgBj_gr2"><stop offset="0" stop-color="#00c6ff"></stop><stop offset="1" stop-color="#0072ff"></stop></linearGradient><linearGradient x1="86" y1="14.92369" x2="86" y2="165.20869" gradientUnits="userSpaceOnUse" id="color-3_03zeLGLpNgBj_gr3"><stop offset="0" stop-color="#00c6ff"></stop><stop offset="1" stop-color="#0072ff"></stop></linearGradient><linearGradient x1="130.34375" y1="113.67588" x2="130.34375" y2="136.29387" gradientUnits="userSpaceOnUse" id="color-4_03zeLGLpNgBj_gr4"><stop offset="0" stop-color="#70dfff"></stop><stop offset="1" stop-color="#70afff"></stop></linearGradient></defs><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M99.4375,67.1875c0,7.42288 -6.01462,13.4375 -13.4375,13.4375c-7.42288,0 -13.4375,-6.01462 -13.4375,-13.4375c0,-7.42288 6.01462,-13.4375 13.4375,-13.4375c0.63962,0 1.3115,0.05375 1.93231,0.15856c-1.20669,1.39481 -1.93231,3.23306 -1.93231,5.21644c0,4.46125 3.60125,8.0625 8.0625,8.0625c1.98337,0 3.82162,-0.72562 5.21644,-1.93231c0.10481,0.62081 0.15856,1.29269 0.15856,1.93231z" fill="url(#color-1_03zeLGLpNgBj_gr1)"></path><path d="M163.72787,68.22756c0.28219,-0.67187 0.28219,-1.41631 0,-2.07744c-0.20962,-0.4945 -21.59406,-50.02512 -77.72787,-50.02512c-56.13381,0 -77.51825,49.53063 -77.72787,50.02244c-0.28219,0.67188 -0.28219,1.41631 0,2.07744c0.20963,0.4945 21.59406,50.02513 77.72788,50.02513c5.74587,0 11.094,-0.56169 16.125,-1.49694v25.68444c0,7.40944 6.02806,13.4375 13.4375,13.4375h26.875c7.40944,0 13.4375,-6.02806 13.4375,-13.4375v-26.875c0,-7.40944 -6.02806,-13.4375 -13.4375,-13.4375h-6.74025c19.59725,-14.50713 27.89894,-33.59375 28.03062,-33.89744zM150.5,115.5625v26.875c0,4.44512 -3.61738,8.0625 -8.0625,8.0625h-26.875c-4.44512,0 -8.0625,-3.61738 -8.0625,-8.0625v-26.875c0,-4.44512 3.61738,-8.0625 8.0625,-8.0625h26.875c4.44513,0 8.0625,3.61737 8.0625,8.0625zM126.05988,102.125h-10.49737c-5.83994,0 -10.7715,3.76788 -12.6205,8.98431c-5.23256,1.10187 -10.84944,1.76569 -16.942,1.76569c-48.07131,0 -68.96125,-38.79944 -72.28837,-45.6875c3.31638,-6.90687 24.13375,-45.6875 72.28838,-45.6875c48.07131,0 68.96125,38.80213 72.28838,45.6875c-2.18494,4.55262 -12.02119,22.92438 -32.2285,34.9375z" fill="url(#color-2_03zeLGLpNgBj_gr2)"></path><path d="M86,34.9375c-17.78319,0 -32.25,14.46681 -32.25,32.25c0,17.78319 14.46681,32.25 32.25,32.25c17.78319,0 32.25,-14.46681 32.25,-32.25c0,-17.78319 -14.46681,-32.25 -32.25,-32.25zM86,94.0625c-14.82425,0 -26.875,-12.05075 -26.875,-26.875c0,-14.82425 12.05075,-26.875 26.875,-26.875c14.82425,0 26.875,12.05075 26.875,26.875c0,14.82425 -12.05075,26.875 -26.875,26.875z" fill="url(#color-3_03zeLGLpNgBj_gr3)"></path><g fill="url(#color-4_03zeLGLpNgBj_gr4)"><path d="M126.3125,138.63469c-1.376,0 -2.752,-0.52406 -3.80013,-1.57219l-8.84994,-8.84994l3.80013,-3.80012l8.84994,8.84994l16.91244,-16.91244l3.80012,3.80013l-16.91244,16.91244c-1.04812,1.04812 -2.42413,1.57219 -3.80013,1.57219z"></path></g></g></g></svg>
+                </CButton>
+                
+            </td>
+          </template>
+          </CDataTable>
+        </CCardBody>
+      </CCard>
+	  <CCard>
+        <CCardHeader>
+        Observaciones encontradas
+        </CCardHeader>
+        <CCardBody>
+			<CFormTextarea placeholder="Observaciones" rows="4"></CFormTextarea>
+        </CCardBody>
+      </CCard>
+    </CCol>
+  </CRow>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  name: 'User',
+  data: () => {
+    return {
+      items: [],
+	  itemsDocuments: [],
+      fields: [
+        {key: 'key'},
+        {key: 'value'},
+      ],
+	  fieldsDocuments: ['id','nombre_document','Descargar'],
+    }
+  },
+  methods: {
+    getUserData (id) {
+      const user = usersData.find((user, index) => index + 1 == id)
+      const userDetails = user ? Object.entries(user) : [['id', 'Not found']]
+      return userDetails.map(([key, value]) => { return { key, value } })
+    },
+	clickDownload(download) {
+            window.open(download, '_blank');
+        },
+    goBack() {
+      this.$router.go(-1)
+    }
+  },
+  mounted: function(){
+    let self = this;
+    axios.get( this.$apiAdress + '/api/prospectos/show/' + self.$route.params.id + '?token=' + localStorage.getItem("api_token"))
+    .then(function (response) {
+      console.log(response.data)
+      //const items = response.data.users;
+      const items = Object.entries(response.data.prospecto);
+	  const itemsDocuments =  response.data.documento;
+      self.items = items.map(([key, value]) => {return {key: key, value: value}});
+	  self.itemsDocuments = itemsDocuments ;
+    }).catch(function (error) {
+      console.log(error);
+      self.$router.push({ path: '/login' });
+    });
+  }
+}
+
+</script>
